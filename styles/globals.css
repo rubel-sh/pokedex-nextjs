@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
 /* Pokemon Card */
 .card-corner {
   position: relative;
