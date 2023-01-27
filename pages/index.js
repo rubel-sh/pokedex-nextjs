@@ -1,12 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
 import PokemonCard from "@/components/PokemonCard";
 import SectionContainer from "@/components/SectionContainer";
 import { useEffect, useState } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+// import required modules
+import { Navigation } from "swiper";
 
 export default function Home() {
   // States
@@ -88,11 +92,31 @@ export default function Home() {
               height={100}
             />
             {/* Card Container */}
-            <div className=" overflow-hidden py-16 flex justify-center md:flex-wrap flex-nowrap gap-2 md:gap-10 justify-self-center ">
+            <div className=" py-16">
               {/* Looping through each pokemons */}
-              {data?.pokemons?.results.map((pokemon) => (
-                <PokemonCard key={pokemon.id} pokemon={pokemon} />
-              ))}
+              {/* Larger Screen */}
+              <div className="hidden md:flex overflow-hidden justify-center md:flex-wrap flex-nowrap gap-2 md:gap-10 justify-self-center  ">
+                {data?.pokemons?.results.map((pokemon) => (
+                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                ))}
+              </div>
+              {/* Small Screen */}
+              <div className="block md:hidden">
+                <Swiper
+                  slidesPerView={2}
+                  spaceBetween={30}
+                  centeredSlides={true}
+                  navigation={true}
+                  modules={[Navigation]}
+                  className="mySwiper"
+                >
+                  {data?.pokemons?.results.map((pokemon) => (
+                    <SwiperSlide>
+                      <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </SectionContainer>
         </div>
