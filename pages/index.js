@@ -88,7 +88,7 @@ export default function Home() {
               height={100}
             />
             {/* Card Container */}
-            <div className="py-16 flex md:flex-wrap flex-nowrap gap-2 md:gap-10 justify-self-center ">
+            <div className=" overflow-hidden py-16 flex justify-center md:flex-wrap flex-nowrap gap-2 md:gap-10 justify-self-center ">
               {/* Looping through each pokemons */}
               {data?.pokemons?.results.map((pokemon) => (
                 <PokemonCard key={pokemon.id} pokemon={pokemon} />
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
 
         {/* Poke News Container */}
-        <div className=" grid grid-cols-[80px_1fr_80px]">
+        <div className=" grid md:grid-cols-[80px_1fr_80px]">
           {/* Left scrolling Image */}
           <div
             style={scrollingBgImg}
@@ -109,15 +109,15 @@ export default function Home() {
             <div className="relative">
               <img
                 src="/Brush.png"
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
+                className="absolute w-1/2 md:max-w-fit top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
                 alt=""
               />
-              <h2 className="text-5xl font-extrabold py-10 md:py-20 text-[#0081c9] text-center">
+              <h2 className="text-3xl lg:text-5xl font-extrabold py-10 md:py-20 text-[#0081c9] text-center">
                 Ash & Pikachu Arrive in <br /> Pokemon Universe
               </h2>
             </div>
-            {/* News */}
-            <div className="grid grid-cols-7 gap-4 text-sm font-bold text-slate-800 break-all pb-20">
+            {/* News for Large screen */}
+            <div className="hidden  lg:grid grid-cols-7 gap-4 text-sm font-bold text-slate-800 break-all pb-20">
               {/* Left Content */}
               <div className="col-span-4  flex flex-col gap-4">
                 <div className="grid grid-cols-4 gap-4">
@@ -143,7 +143,7 @@ export default function Home() {
                         "Lorem ipsum dolor sit amet..", comes from a linetext
                         ever since the 1500s, when an unknow
                       </p>
-                      <img src="/Image04.png" width={150} height={150} alt="" />
+                      <img src="/Image04.png" width="200" height="200" alt="" />
                     </div>
                     <p>
                       Contrary to popular belief, Lorem Ipsum is not simply
@@ -187,7 +187,7 @@ export default function Home() {
                 {/* Image with text */}
                 <div className="flex flex-col gap-2">
                   <div className="flex  gap-4">
-                    <img src="/Image05.png" width={150} height={150} alt="" />
+                    <img src="/Image05.png" width="200" height="200" alt="" />
                     <p>
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been the industry's
@@ -199,7 +199,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="flex gap-4">
-                    <img src="/Image01.png" width={150} height={150} alt="" />
+                    <img src="/Image01.png" width="200" height="200" alt="" />
                     <p>
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been the industry's
@@ -224,6 +224,40 @@ export default function Home() {
                   aliquam quaerat voluptatem. Ut enim ad minima veniam
                 </p>
               </div>
+            </div>
+
+            {/* News for mobile screen */}
+            <div className="block md:hidden px-4 font-bold text-slate-700">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum
+              </p>
+              {/* Images */}
+              <div className="grid grid-cols-3 gap-3">
+                <img src="/Image04.png" className="mt-10" alt="" />
+                <div className="flex flex-col gap-3">
+                  <img src="/Image03.png" alt="" />
+                  <img src="Image02.png" alt="" />
+                </div>
+                <div className="mt-10 grid gap-3">
+                  <img src="/Image05.png" alt="" />
+                  <img src="/Image01.png" alt="" />
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum
+              </p>
             </div>
           </SectionContainer>
           {/* Right Scrolling Image */}
