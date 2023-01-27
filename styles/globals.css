@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Pokemon Card */
+.card-corner {
+  position: relative;
+  transition: all 350ms ease-in-out;
+  cursor: pointer;
+  /* mask: radial-gradient(circle 30px at bottom right, #0000 98%, #000) bottom
+    right; */
+  clip-path: polygon(100% 0%, 100% 85%, 80% 100%, 0 100%, 0 0);
+}
+.card-corner:hover {
+  background-color: #0081c9;
+  color: white;
+}
+.card-corner:hover img {
+  transform: scale(1);
+  transition: all 400ms ease-in-out;
+}
+
+.scrollingImg {
+  background-repeat: repeat;
+  animation: animateImage 15s linear infinite forwards;
+}
+
+@keyframes animateImage {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -600px;
+  }
+}

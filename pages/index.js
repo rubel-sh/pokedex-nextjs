@@ -3,10 +3,67 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import PokemonCard from "@/components/PokemonCard";
+import SectionContainer from "@/components/SectionContainer";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  // States
+  const [data, setData] = useState([]);
+  // Styles
+  const bgImage = {
+    backgroundImage: "url('/Background.png')",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  };
+
+  const scrollingBgImg = {
+    backgroundImage: "url('/Left.png')",
+  };
+
+  // Fetch Data
+  const fetchData = () => {
+    const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
+      pokemons(limit: $limit, offset: $offset) {
+        count
+        next
+        previous
+        status
+        message
+        results {
+          id
+          url
+          name
+          image
+          artwork
+        }
+      }
+    }`;
+
+    const gqlVariables = {
+      limit: 12,
+      offset: 1,
+    };
+
+    fetch("https://graphql-pokeapi.graphcdn.app/", {
+      credentials: "omit",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: gqlQuery,
+        variables: gqlVariables,
+      }),
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((res) => setData(res.data));
+  };
+
+  // Componenent will mount
+  useEffect(() => fetchData(), []);
+
+  console.log(data);
+
   return (
     <>
       <Head>
@@ -19,7 +76,41 @@ export default function Home() {
         />
       </Head>
       <main>
-        <PokemonCard demo={"Demo props"} />
+        {/* Pokemon Card Container */}
+        <div style={bgImage}>
+          <SectionContainer>
+            <div className="py-5"></div>
+            <Image
+              className="mx-auto"
+              src="/Logo.png"
+              alt="Pokemon Logo"
+              width={200}
+              height={100}
+            />
+            {/* Card Container */}
+            <div className="py-16 flex md:flex-wrap flex-nowrap gap-2 md:gap-10 justify-self-center ">
+              {/* Looping through each pokemons */}
+              {data?.pokemons?.results.map((pokemon) => (
+                <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              ))}
+            </div>
+          </SectionContainer>
+        </div>
+
+        {/* Poke News Container */}
+        <div className=" grid grid-cols-[100px_1fr_100px]">
+          <div
+            style={scrollingBgImg}
+            className="scrollingImg hidden md:block"
+          ></div>
+          <SectionContainer>
+            <div className="min-h-[600px]">dfgdfg</div>
+          </SectionContainer>
+          <div
+            style={scrollingBgImg}
+            className="scrollingImg hidden md:block"
+          ></div>
+        </div>
       </main>
     </>
   );
