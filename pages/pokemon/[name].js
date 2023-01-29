@@ -1,15 +1,16 @@
 import PokemonLogo from "@/components/PokemonLogo";
 import SectionContainer from "@/components/SectionContainer";
 import VerticalScrollImage from "@/components/VerticalScrollImage";
+import { ImageContext } from "@/context/ImageProvider";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const Pokemon = () => {
   const router = useRouter();
   const pokemonName = router.query.name;
-  const pokeImage = router.query.image;
+  const { image } = useContext(ImageContext);
 
   //   States
   const [data, setData] = useState({});
@@ -226,7 +227,7 @@ const Pokemon = () => {
               {/* Center Image */}
               <div className="col-span-3 order-1 lg:order-2 justify-self-center">
                 <img
-                  src={pokeImage}
+                  src={image}
                   alt=""
                   className="scale-90 hover:scale-100 transition-all duration-300 mb-20"
                 />
