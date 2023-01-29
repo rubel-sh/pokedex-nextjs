@@ -11,6 +11,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
+import Link from "next/link";
+import PokemonLogo from "@/components/PokemonLogo";
+import VerticalScrollImage from "@/components/VerticalScrollImage";
 
 export default function Home() {
   // States
@@ -63,7 +66,7 @@ export default function Home() {
       .then((res) => setData(res.data));
   };
 
-  // Componenent will mount
+  // Componenent did mount
   useEffect(() => fetchData(), []);
 
   console.log(data);
@@ -83,21 +86,21 @@ export default function Home() {
         {/* Pokemon Card Container */}
         <div style={bgImage}>
           <SectionContainer>
-            <div className="py-5"></div>
-            <Image
-              className="mx-auto"
-              src="/Logo.png"
-              alt="Pokemon Logo"
-              width={200}
-              height={100}
-            />
+            <PokemonLogo />
             {/* Card Container */}
             <div className=" py-16">
               {/* Looping through each pokemons */}
               {/* Larger Screen */}
               <div className="hidden md:flex overflow-hidden justify-center md:flex-wrap flex-nowrap gap-2 md:gap-10 justify-self-center  ">
                 {data?.pokemons?.results.map((pokemon) => (
-                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                  <Link
+                    href={{
+                      pathname: "/pokemon/[name]",
+                      query: { name: pokemon.name, image: pokemon.artwork },
+                    }}
+                  >
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                  </Link>
                 ))}
               </div>
               {/* Small Screen */}
@@ -112,7 +115,16 @@ export default function Home() {
                 >
                   {data?.pokemons?.results.map((pokemon) => (
                     <SwiperSlide>
-                      <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                      <Link
+                        href={{
+                          pathname: "/pokemon/[name]",
+                          query: {
+                            name: pokemon.name,
+                          },
+                        }}
+                      >
+                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                      </Link>
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -124,10 +136,7 @@ export default function Home() {
         {/* Poke News Container */}
         <div className=" grid md:grid-cols-[80px_1fr_80px]">
           {/* Left scrolling Image */}
-          <div
-            style={scrollingBgImg}
-            className="scrollingImg hidden md:block"
-          ></div>
+          <VerticalScrollImage />
           {/* Main Content */}
           <SectionContainer>
             <div className="relative">
@@ -251,7 +260,7 @@ export default function Home() {
             </div>
 
             {/* News for mobile screen */}
-            <div className="block md:hidden px-4 font-bold text-slate-700">
+            <div className="block lg:hidden px-4 font-bold text-slate-700">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -285,10 +294,7 @@ export default function Home() {
             </div>
           </SectionContainer>
           {/* Right Scrolling Image */}
-          <div
-            style={scrollingBgImg}
-            className="scrollingImg hidden md:block"
-          ></div>
+          <VerticalScrollImage />
         </div>
       </main>
     </>

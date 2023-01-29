@@ -15,7 +15,7 @@ const PokemonCard = ({ pokemon }) => {
         />
       </div>
 
-      <p className=" text-md font-medium mt-5">{name}</p>
+      <p className=" text-md font-medium mt-5 capitalize">{name}</p>
       <div className="mt-1">
         <div className="bg-purple-400 px-4 max-w-fit text-slate-100 rounded-sm">
           Poison

@@ -1,5 +1,7 @@
+import Pokemon from "./[name]";
+
 const index = () => {
-  return <div>Pokemon</div>;
+  return <div></div>;
 };
 
 export default index;
